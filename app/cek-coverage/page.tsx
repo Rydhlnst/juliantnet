@@ -1,0 +1,6 @@
+import type { Metadata } from "next"
+import { CoverageChecker } from "@/components/coverage-checker"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+export const metadata: Metadata = { title: "Cek Coverage", description: "Cek ketersediaan jaringan internet Internet Cepat di alamat Anda.", alternates: { canonical: "/cek-coverage" } }
+export default function CoveragePage() { return <><SiteHeader /><main className="mx-auto max-w-5xl px-5 py-20 lg:px-8"><div className="rounded-[2rem] bg-secondary p-7 text-secondary-foreground sm:p-12"><p className="text-sm font-black tracking-[.16em] text-accent uppercase">Cek lokasi</p><h1 className="mt-3 max-w-xl text-4xl font-black tracking-tight sm:text-5xl">Apakah jaringan kami sudah sampai di lokasimu?</h1><p className="mt-5 max-w-xl leading-7 text-secondary-foreground/70">Masukkan alamat, kecamatan, atau kode pos. Hasil ini adalah mock yang siap dihubungkan ke API coverage sebenarnya.</p><div className="mt-8 rounded-2xl bg-background p-4 text-foreground sm:p-6"><CoverageChecker /></div></div></main><SiteFooter /></> }

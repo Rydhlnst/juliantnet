@@ -1,0 +1,7 @@
+import type { Metadata } from "next"
+import { MessageCircle } from "lucide-react"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+import { whatsappUrl } from "@/lib/site"
+export const metadata: Metadata = { title: "Kontak", description: "Hubungi Internet Cepat untuk pertanyaan coverage dan pemasangan.", alternates: { canonical: "/kontak" } }
+export default function ContactPage() { return <><SiteHeader /><main className="mx-auto max-w-5xl px-5 py-20 lg:px-8"><div className="rounded-[2rem] bg-secondary p-8 text-secondary-foreground sm:p-12"><p className="text-sm font-black tracking-[.16em] text-accent uppercase">Kontak</p><h1 className="mt-3 text-5xl font-black tracking-tight">Mari cek jaringan di lokasi kamu.</h1><p className="mt-5 max-w-2xl leading-7 text-secondary-foreground/70">Nomor WhatsApp di template ini adalah placeholder. Ganti nomor tersebut pada <code>lib/site.ts</code> sebelum website dipublikasikan.</p><a className="mt-8 inline-flex h-12 items-center gap-2 rounded-xl bg-accent px-5 font-bold text-accent-foreground" href={whatsappUrl("Halo Internet Cepat, saya ingin bertanya tentang pemasangan WiFi.")} target="_blank" rel="noreferrer"><MessageCircle className="size-5" />Chat WhatsApp</a></div></main><SiteFooter /></> }

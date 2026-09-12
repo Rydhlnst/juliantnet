@@ -1,0 +1,5 @@
+import type { Metadata } from "next"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+export const metadata: Metadata = { title: "Tentang Kami", description: "Tentang Internet Cepat dan cara kami membantu pelanggan terhubung.", alternates: { canonical: "/tentang" } }
+export default function AboutPage() { return <><SiteHeader /><main className="mx-auto max-w-5xl px-5 py-20 lg:px-8"><p className="text-sm font-black tracking-[.16em] text-primary uppercase">Tentang kami</p><h1 className="mt-3 text-5xl font-black tracking-tight">Internet yang mudah dipilih dan nyaman dipakai.</h1><div className="mt-8 max-w-3xl space-y-5 leading-7 text-muted-foreground"><p>Internet Cepat adalah nama placeholder untuk website ini. Ganti dengan identitas perusahaan, alamat, legalitas, dan cerita yang telah diverifikasi sebelum dipublikasikan.</p><p>Kami membantu rumah dan usaha kecil memulai dari langkah paling penting: mengecek ketersediaan jaringan di lokasi mereka.</p></div></main><SiteFooter /></> }

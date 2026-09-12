@@ -1,69 +1,70 @@
-import Image from "next/image";
+import type { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight, Check, CircleGauge, Gamepad2, Headphones, House, Laptop, MessageCircle, RadioTower, Router, ShieldCheck, Store, Wrench } from "lucide-react"
+
+import { CoverageChecker } from "@/components/coverage-checker"
+import { PlanCard } from "@/components/plan-card"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { faqs } from "@/data/faqs"
+import { plans } from "@/data/plans"
+import { site, whatsappUrl } from "@/lib/site"
+
+export const metadata: Metadata = {
+  title: "Internet WiFi Cepat & Stabil",
+  description: "Nikmati internet WiFi cepat dan stabil untuk rumah dan bisnis. Cek coverage dan pilih paket internet yang sesuai kebutuhan Anda.",
+  alternates: { canonical: "/" },
+}
+
+const useCases = [
+  { icon: Laptop, title: "Kerja dari rumah", description: "Meeting tetap jernih saat perangkat lain terhubung." },
+  { icon: Gamepad2, title: "Gaming lebih fokus", description: "Koneksi stabil untuk sesi bermain yang nyaman." },
+  { icon: House, title: "Waktu keluarga", description: "Streaming dan belajar online berjalan bersamaan." },
+  { icon: Store, title: "Usaha lebih siap", description: "Kasir, pelanggan, dan operasional tetap terhubung." },
+]
+
+const benefits = [
+  { icon: Router, title: "Internet unlimited", text: "Pakai internet untuk aktivitas sehari-hari tanpa harus memantau kuota." },
+  { icon: CircleGauge, title: "Kecepatan sesuai kebutuhan", text: "Pilih paket berdasarkan jumlah perangkat dan kebiasaan di rumah." },
+  { icon: Wrench, title: "Instalasi terjadwal", text: "Tim kami mengonfirmasi jadwal pemasangan sebelum datang ke lokasi." },
+  { icon: Headphones, title: "Bantuan mudah dijangkau", text: "Dapatkan bantuan melalui kanal yang familiar bagi pelanggan Indonesia." },
+  { icon: ShieldCheck, title: "Informasi transparan", text: "Rincian biaya dan perangkat dikonfirmasi sebelum pendaftaran selesai." },
+  { icon: RadioTower, title: "Dibangun untuk sehari-hari", text: "Untuk belajar, bekerja, hiburan, dan operasional usaha kecil." },
+]
+
+function SectionHeading({ eyebrow, title, description }: { eyebrow?: string; title: string; description?: string }) {
+  return <div className="max-w-2xl">{eyebrow && <p className="mb-3 text-sm font-black tracking-[0.16em] text-primary uppercase">{eyebrow}</p>}<h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl">{title}</h2>{description && <p className="mt-4 text-base leading-7 text-muted-foreground">{description}</p>}</div>
+}
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  const organizationSchema = { "@context": "https://schema.org", "@type": "Organization", name: site.name, url: site.url, description: site.description }
+  const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) }
+
+  return <>
+    <SiteHeader />
+    <main id="main">
+      <section className="overflow-hidden bg-background"><div className="mx-auto grid max-w-7xl gap-10 px-5 pt-12 pb-16 lg:grid-cols-[1.04fr_.96fr] lg:items-center lg:px-8 lg:pt-20 lg:pb-20">
+        <div><Badge className="rounded-full bg-accent px-3 py-1 text-accent-foreground">Internet cepat untuk rumah & bisnis</Badge><h1 className="mt-6 max-w-xl text-5xl font-black tracking-[-0.055em] text-foreground sm:text-6xl lg:text-7xl">WiFi cepat.<br /><span className="text-primary">Stabil.</span> Tanpa ribet.</h1><p className="mt-6 max-w-lg text-lg leading-8 text-muted-foreground">Nikmati koneksi internet untuk streaming, gaming, belajar, dan bekerja tanpa gangguan yang tidak perlu.</p><div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-foreground">{["Internet unlimited", "Instalasi terjadwal", "Bantuan lokal"].map((item) => <span key={item} className="flex items-center gap-2"><Check className="size-4 text-primary" />{item}</span>)}</div><div className="mt-9 flex flex-wrap gap-3"><Link className="inline-flex h-12 items-center gap-2 rounded-xl bg-primary px-5 font-bold text-primary-foreground transition hover:bg-primary/90" href="#coverage">Cek Coverage <ArrowRight className="size-4" /></Link><Link className="inline-flex h-12 items-center rounded-xl border border-border/70 px-5 font-bold transition hover:border-primary/70 hover:text-primary" href="#paket">Lihat Paket</Link></div></div>
+        <div className="relative min-h-95 overflow-hidden rounded-[2rem] bg-primary/10 sm:min-h-125"><Image src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1500&q=85" alt="Ruang keluarga modern dengan perangkat yang terhubung WiFi" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /><div className="absolute right-5 bottom-5 rounded-2xl bg-background/95 p-4 shadow-lg backdrop-blur"><p className="text-sm font-black text-primary">Untuk internetan sehari-hari</p><p className="mt-1 text-xs text-muted-foreground">Pilih kecepatan sesuai kebutuhan.</p></div></div>
+      </div></section>
+      <section id="coverage" className="relative z-10 -mt-4 px-5 lg:px-8"><div className="mx-auto max-w-5xl rounded-2xl bg-secondary p-6 text-secondary-foreground shadow-xl sm:p-8"><div className="grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><p className="text-sm font-black tracking-[0.16em] text-accent uppercase">Mulai dari lokasi Anda</p><h2 className="mt-2 text-2xl font-black tracking-tight">Cek apakah jaringan kami sudah tersedia di lokasi kamu.</h2></div><CoverageChecker /></div></div></section>
+      <section className="border-b border-border/70 bg-white"><div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-border/70 px-5 sm:grid-cols-4 lg:px-8">{["Statistik pelanggan", "Uptime jaringan", "Dukungan pelanggan", "Informasi layanan"].map((item) => <div key={item} className="px-4 py-6 sm:px-6"><p className="text-sm font-black text-primary">—</p><p className="mt-1 text-sm font-medium text-muted-foreground">{item}<br />menunggu data resmi</p></div>)}</div></section>
+      <section id="paket" className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><SectionHeading eyebrow="Paket internet" title="Pilih kecepatan yang cocok untuk kamu" description="Harga ditampilkan sebagai placeholder sampai detail komersial disediakan. Paket mudah dibandingkan dari jumlah perangkat dan aktivitasnya." /><Link className="font-bold text-primary hover:underline" href="/paket-internet">Bandingkan semua paket →</Link></div><div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">{plans.map((plan) => <PlanCard key={plan.name} plan={plan} />)}</div></section>
+      <section className="bg-secondary py-20 text-secondary-foreground"><div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.85fr_1.15fr] lg:px-8"><SectionHeading eyebrow="Pilih dengan jelas" title="Berapa Mbps yang kamu butuhkan?" description="Cocokkan aktivitas utama dengan kapasitas yang paling nyaman." /><div className="grid gap-px overflow-hidden rounded-2xl bg-white/20 sm:grid-cols-2">{plans.map((plan) => <div key={plan.name} className="bg-secondary p-6"><p className="text-3xl font-black text-accent">{plan.speed}</p><h3 className="mt-4 text-lg font-bold">{plan.name}</h3><p className="mt-2 text-sm leading-6 text-secondary-foreground/70">{plan.description}</p></div>)}</div></div></section>
+      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="grid gap-10 lg:grid-cols-[1fr_.92fr] lg:items-center"><div className="relative min-h-105 overflow-hidden rounded-[2rem]"><Image src="https://images.unsplash.com/photo-1593642532400-2682810df593?auto=format&fit=crop&w=1400&q=85" alt="Seseorang bekerja menggunakan laptop di rumah" fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" /></div><div><SectionHeading eyebrow="Untuk keseharian" title="Internet yang mengikuti keseharianmu" description="Koneksi yang baik terasa ketika semua aktivitas di rumah berjalan lancar." /><div className="mt-7 grid gap-5 sm:grid-cols-2">{useCases.map(({ icon: Icon, title, description }) => <div key={title}><Icon className="size-5 text-primary" /><h3 className="mt-3 font-bold">{title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{description}</p></div>)}</div></div></div></section>
+      <section className="bg-muted/60 py-20"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading eyebrow="Kenapa Internet Cepat?" title="Sederhana untuk dipilih. Nyaman untuk dipakai." description="Dari cek coverage sampai internet aktif, informasi penting dibuat mudah ditemukan." /><div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">{benefits.map(({ icon: Icon, title, text }) => <div key={title} className="border-t border-border/70 pt-5"><Icon className="size-5 text-primary" /><h3 className="mt-4 font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></div>)}</div></div></section>
+      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="overflow-hidden rounded-[2rem] bg-primary text-primary-foreground"><div className="grid lg:grid-cols-2"><div className="p-8 sm:p-12"><p className="text-sm font-black tracking-[0.16em] text-accent uppercase">Infrastruktur</p><h2 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">Jaringan yang dibangun untuk tetap stabil.</h2><p className="mt-5 max-w-md leading-7 text-primary-foreground/75">Fiber, perangkat jaringan, dan instalasi profesional adalah bagian dari pengalaman yang perlu kami jelaskan secara transparan.</p><ul className="mt-7 space-y-3 text-sm font-semibold">{["Penjadwalan instalasi yang dikonfirmasi", "Panduan perangkat saat pemasangan", "Dukungan saat membutuhkan bantuan"].map((item) => <li key={item} className="flex gap-2"><Check className="size-5 text-accent" />{item}</li>)}</ul></div><div className="relative min-h-85"><Image src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=85" alt="Perangkat infrastruktur jaringan" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" /></div></div></div></section>
+      <section className="bg-muted/60 py-20"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading eyebrow="Cara mulai" title="Mulai internetan dalam beberapa langkah" /><ol className="mt-10 grid gap-6 md:grid-cols-5">{["Cek Coverage", "Pilih Paket", "Konfirmasi Data", "Teknisi Datang", "WiFi Aktif"].map((step, index) => <li key={step} className="border-t-2 border-primary/70 pt-4"><span className="text-sm font-black text-primary">0{index + 1}</span><p className="mt-3 font-bold">{step}</p></li>)}</ol></div></section>
+      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="grid gap-10 rounded-[2rem] bg-secondary p-8 text-secondary-foreground sm:p-12 lg:grid-cols-[1fr_.75fr] lg:items-center"><div><p className="text-sm font-black tracking-[0.16em] text-accent uppercase">Untuk usaha kecil</p><h2 className="mt-4 text-3xl font-black tracking-tight">Internet untuk bisnis yang tetap fokus pada kebutuhan harian.</h2><p className="mt-4 max-w-xl leading-7 text-secondary-foreground/70">Untuk kafe, toko, kantor kecil, workshop, dan restoran—tanpa mengubahnya menjadi paket enterprise yang rumit.</p><Link className="mt-7 inline-flex items-center gap-2 font-bold text-accent hover:underline" href="/internet-bisnis">Lihat Internet Bisnis <ArrowRight className="size-4" /></Link></div><Card className="border-0 bg-background py-6 text-foreground shadow-none"><CardContent className="space-y-4 px-6"><Store className="size-7 text-primary" /><h3 className="text-xl font-black">Mulai dari lokasi bisnis Anda</h3><p className="text-sm leading-6 text-muted-foreground">Cek dulu apakah jaringan tersedia, lalu diskusikan kebutuhan perangkat dan operasional bersama tim kami.</p></CardContent></Card></div></section>
+      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8"><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><SectionHeading eyebrow="FAQ" title="Jawaban sebelum kamu mulai" description="Informasi berikut perlu diselaraskan dengan kebijakan layanan sebenarnya." /><Accordion className="rounded-2xl border border-border/70 bg-white px-5" multiple>{faqs.map(([question, answer]) => <AccordionItem key={question} value={question}><AccordionTrigger className="py-5 text-base no-underline hover:no-underline">{question}</AccordionTrigger><AccordionContent className="leading-7 text-muted-foreground">{answer}</AccordionContent></AccordionItem>)}</Accordion></div></section>
+      <section className="bg-primary px-5 py-20 lg:px-8"><div className="mx-auto max-w-5xl text-center text-primary-foreground"><p className="text-sm font-black tracking-[0.16em] text-accent uppercase">Siap mulai?</p><h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">Siap menikmati internet yang lebih cepat?</h2><p className="mx-auto mt-5 max-w-xl leading-7 text-primary-foreground/75">Cek jaringan di lokasi kamu dan temukan paket yang paling sesuai.</p><div className="mx-auto mt-8 max-w-3xl rounded-2xl bg-background p-4 text-left text-foreground"><CoverageChecker compact /></div><a className="mt-6 inline-flex items-center gap-2 font-bold text-accent hover:underline" href={whatsappUrl("Halo Internet Cepat, saya ingin cek pemasangan WiFi di lokasi saya.")} target="_blank" rel="noreferrer"><MessageCircle className="size-5" />Chat WhatsApp</a></div></section>
+    </main>
+    <SiteFooter />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+  </>
 }

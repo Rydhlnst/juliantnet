@@ -1,0 +1,3 @@
+import type { MetadataRoute } from "next"
+const routes = ["", "/paket-internet", "/cek-coverage", "/internet-rumah", "/internet-bisnis", "/tentang", "/bantuan", "/faq", "/kontak", "/daftar"]
+export default function sitemap(): MetadataRoute.Sitemap { return routes.map((route) => ({ url: `https://internetcepat.id${route}`, lastModified: new Date(), changeFrequency: "monthly", priority: route === "" ? 1 : 0.7 })) }

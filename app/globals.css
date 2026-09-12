@@ -1,26 +1,59 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist);
+  --font-heading: var(--font-geist);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #fafaf8;
+  --foreground: #15372f;
+  --card: #ffffff;
+  --card-foreground: #15372f;
+  --popover: #ffffff;
+  --popover-foreground: #15372f;
+  --primary: #0b7d47;
+  --primary-foreground: #ffffff;
+  --secondary: #173c34;
+  --secondary-foreground: #f8f8f3;
+  --muted: #f0f3ec;
+  --muted-foreground: #60716a;
+  --accent: #c9e83c;
+  --accent-foreground: #1b342a;
+  --destructive: #b42318;
+  --border: #e2e9e0;
+  --input: #e2e9e0;
+  --ring: #0b7d47;
+  --radius: 0.75rem;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+* { @apply border-border; }
+html { @apply font-sans; }
+body { @apply min-h-screen bg-background text-foreground antialiased; }
+button, a, input { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2; }

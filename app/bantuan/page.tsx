@@ -1,0 +1,7 @@
+import type { Metadata } from "next"
+import Link from "next/link"
+import { CircleHelp, MessageCircle, Router, Wrench } from "lucide-react"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+export const metadata: Metadata = { title: "Bantuan", description: "Pusat bantuan Internet Cepat untuk pemasangan dan kendala internet.", alternates: { canonical: "/bantuan" } }
+export default function HelpPage() { const items = [{ icon: Router, title: "Panduan perangkat", text: "Informasi router dan koneksi rumah." }, { icon: Wrench, title: "Status pemasangan", text: "Cek tahapan pendaftaran dan instalasi." }, { icon: CircleHelp, title: "Pertanyaan umum", text: "Temukan jawaban sebelum menghubungi kami." }]; return <><SiteHeader /><main className="mx-auto max-w-7xl px-5 py-16 lg:px-8"><p className="text-sm font-black tracking-[.16em] text-primary uppercase">Pusat bantuan</p><h1 className="mt-3 text-5xl font-black tracking-tight">Butuh bantuan? Mulai dari sini.</h1><div className="mt-10 grid gap-5 md:grid-cols-3">{items.map(({ icon: Icon, title, text }) => <div key={title} className="rounded-2xl border border-border p-6"><Icon className="size-6 text-primary" /><h2 className="mt-5 text-xl font-black">{title}</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></div>)}</div><Link className="mt-10 inline-flex items-center gap-2 font-bold text-primary hover:underline" href="/kontak"><MessageCircle className="size-4" />Hubungi kami</Link></main><SiteFooter /></> }
