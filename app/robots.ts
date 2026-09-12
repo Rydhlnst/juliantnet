@@ -1,2 +1,11 @@
 import type { MetadataRoute } from "next"
-export default function robots(): MetadataRoute.Robots { return { rules: { userAgent: "*", allow: "/" }, sitemap: "https://internetcepat.id/sitemap.xml" } }
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://internetcepat.id"
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [{ userAgent: "*", allow: "/", disallow: ["/api/", "/_next/"] }],
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
+  }
+}

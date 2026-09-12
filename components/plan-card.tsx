@@ -11,7 +11,7 @@ import { whatsappUrl } from "@/lib/site"
 export function PlanCard({ plan }: { plan: Plan }) {
   const message = `Halo Internet Cepat, saya tertarik dengan paket ${plan.name}. Bisa dibantu cek coverage di lokasi saya?`
   return (
-    <Card className={cn("relative h-full gap-5 overflow-visible border border-border/75 bg-white py-6 shadow-none", plan.popular && "border-primary/70 ring-1 ring-primary/20")}> 
+    <Card className={cn("relative h-full gap-5 overflow-visible border border-border/75 bg-card py-6 shadow-none", plan.popular && "border-primary/70 ring-1 ring-primary/20")}>
       {plan.popular && <Badge className="absolute -top-3 left-5 z-10 rounded-full bg-accent px-3 py-1 text-accent-foreground shadow-sm">Paling Populer</Badge>}
       <CardHeader className="gap-3 px-6">
         <p className="text-sm font-bold tracking-[0.16em] text-primary uppercase">{plan.name}</p>

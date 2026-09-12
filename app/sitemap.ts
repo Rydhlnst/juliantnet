@@ -1,3 +1,16 @@
 import type { MetadataRoute } from "next"
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://internetcepat.id"
 const routes = ["", "/paket-internet", "/cek-coverage", "/internet-rumah", "/internet-bisnis", "/tentang", "/bantuan", "/faq", "/kontak", "/daftar"]
-export default function sitemap(): MetadataRoute.Sitemap { return routes.map((route) => ({ url: `https://internetcepat.id${route}`, lastModified: new Date(), changeFrequency: "monthly", priority: route === "" ? 1 : 0.7 })) }
+
+export const revalidate = 3600
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date()
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : 0.7,
+  }))
+}

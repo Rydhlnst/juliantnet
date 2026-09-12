@@ -4,7 +4,7 @@ import { whatsappUrl } from "@/lib/site"
 
 export function FloatingWhatsapp() {
   return <a
-    href={whatsappUrl("Halo Internet Cepat, saya ingin bertanya tentang pemasangan WiFi.")}
+    href={whatsappUrl("Halo Internet Cepat, saya ingin cek paket dan coverage WiFi.")}
     target="_blank"
     rel="noreferrer"
     aria-label="Chat WhatsApp dengan Internet Cepat"

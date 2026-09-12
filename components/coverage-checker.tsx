@@ -49,7 +49,7 @@ export function CoverageChecker({ compact = false }: { compact?: boolean }) {
       <div className="flex flex-col gap-3 sm:flex-row">
         <div className="relative flex-1">
           <MapPin className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-primary" aria-hidden="true" />
-          <Input id={compact ? "coverage-compact" : "coverage-address"} value={address} onChange={(event) => setAddress(event.target.value)} placeholder="Alamat, kecamatan, atau kode pos" className="h-12 rounded-xl border-border bg-white pl-11 text-base shadow-none" required minLength={3} />
+          <Input id={compact ? "coverage-compact" : "coverage-address"} value={address} onChange={(event) => setAddress(event.target.value)} placeholder="Alamat, kecamatan, atau kode pos" className="h-12 rounded-xl border-border bg-card pl-11 text-base shadow-none" required minLength={3} />
         </div>
         <Button type="submit" disabled={isPending} className="h-12 rounded-xl px-5 text-base font-bold">
           <Search aria-hidden="true" /> {isPending ? "Memeriksa..." : "Cek Coverage"}

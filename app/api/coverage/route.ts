@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const unavailable = /belum|luar area|tidak tersedia/i.test(input.data.address)
     return NextResponse.json({
       available: !unavailable,
-      message: unavailable ? "Lokasi ini belum terjangkau. Tinggalkan kontak agar kami bisa memberi kabar saat jaringan hadir." : `Jaringan tersedia untuk ${input.data.propertyType.toLowerCase()} Anda! Lanjutkan untuk melihat paket yang cocok.`,
+      message: unavailable ? "Lokasi ini belum masuk jangkauan Internet Cepat. Tinggalkan kontak agar kami dapat memberi kabar saat jaringan tersedia." : `Internet Cepat tersedia untuk ${input.data.propertyType.toLowerCase()} Anda. Lanjutkan untuk melihat paket yang paling sesuai.`,
     })
   } catch {
     return NextResponse.json({ error: "Format permintaan tidak valid. Silakan coba lagi." }, { status: 400 })
