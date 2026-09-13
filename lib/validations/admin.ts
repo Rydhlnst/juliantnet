@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { allowedHomeContentFields, HOME_SECTION_FIELDS, HOME_SECTION_ORDER, type HomeSectionKey } from "@/lib/home-content"
 
 const optionalNumber = z.coerce.number().int().nonnegative().optional().or(z.literal(""))
 export const planSchema = z.object({ name: z.string().trim().min(2).max(100), slug: z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(120), speedMbps: z.coerce.number().int().positive(), price: z.coerce.number().nonnegative(), promoPrice: z.coerce.number().nonnegative().optional().nullable(), promoLabel: z.string().trim().max(120).optional().nullable(), promoStartAt: z.string().datetime().optional().nullable(), promoEndAt: z.string().datetime().optional().nullable(), description: z.string().trim().min(10).max(3000), deviceMin: z.coerce.number().int().positive(), deviceMax: z.coerce.number().int().positive().optional().nullable(), benefits: z.array(z.string().trim().min(1).max(120)).min(1).max(20), isPopular: z.boolean().default(false), isActive: z.boolean().default(true), sortOrder: z.coerce.number().int().nonnegative().default(0) })
@@ -7,3 +8,35 @@ export const faqSchema = z.object({ question: z.string().trim().min(5).max(255),
 export const testimonialSchema = z.object({ name: z.string().trim().min(2).max(120), location: z.string().trim().max(160).optional().nullable(), quote: z.string().trim().min(5).max(3000), rating: z.coerce.number().int().min(1).max(5).optional().nullable(), sortOrder: z.coerce.number().int().nonnegative().default(0), isPublished: z.boolean().default(false) })
 export const leadStatusSchema = z.object({ status: z.enum(["NEW", "CONTACTED", "SURVEY", "INSTALLATION", "ACTIVE", "LOST"]), notes: z.string().trim().max(2000).optional().nullable() })
 export const settingsSchema = z.object({ companyName: z.string().trim().min(2).max(160), brandName: z.string().trim().min(2).max(160), whatsappNumber: z.string().trim().regex(/^\d{10,16}$/), phone: z.string().trim().max(32).optional().nullable(), email: z.string().trim().email().max(255).optional().nullable(), businessAddress: z.string().trim().max(2000).optional().nullable(), mapsUrl: z.string().url().optional().nullable(), operatingHours: z.string().trim().max(255).optional().nullable(), instagram: z.string().url().optional().nullable(), facebook: z.string().url().optional().nullable(), tiktok: z.string().url().optional().nullable(), youtube: z.string().url().optional().nullable(), defaultSeoTitle: z.string().trim().min(5).max(180), defaultSeoDescription: z.string().trim().min(10).max(320), footerCopy: z.string().trim().max(2000).optional().nullable() })
+
+export const homeSectionUpdateSchema = z.object({
+  content: z.record(z.string(), z.string().max(2000)),
+  isVisible: z.boolean(),
+})
+
+export const homeSectionOrderSchema = z.object({
+  sections: z.array(z.enum(HOME_SECTION_ORDER)).length(HOME_SECTION_ORDER.length),
+}).superRefine(({ sections }, ctx) => {
+  if (new Set(sections).size !== HOME_SECTION_ORDER.length) {
+    ctx.addIssue({ code: "custom", path: ["sections"], message: "Each homepage section must appear exactly once." })
+  }
+})
+
+export function homeSectionUpdateSchemaFor(key: HomeSectionKey) {
+  const allowed = new Set(allowedHomeContentFields(key))
+  return homeSectionUpdateSchema.superRefine(({ content }, ctx) => {
+    for (const [field, value] of Object.entries(content)) {
+      if (!allowed.has(field)) {
+        ctx.addIssue({ code: "custom", path: ["content", field], message: "This field is not editable for this section." })
+        continue
+      }
+      const config = HOME_SECTION_FIELDS[key].find((item) => item.key === field)
+      if (config?.type === "link" && !value.startsWith("/") && !value.startsWith("#")) {
+        ctx.addIssue({ code: "custom", path: ["content", field], message: "Links must start with / or #." })
+      }
+      if (config?.type === "image" && !value.startsWith("/") && !/^https?:\/\//.test(value)) {
+        ctx.addIssue({ code: "custom", path: ["content", field], message: "Images must use a public path or HTTPS URL." })
+      }
+    }
+  })
+}
