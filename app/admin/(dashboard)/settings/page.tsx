@@ -1,0 +1,2 @@
+import { SettingsForm } from "@/components/admin/settings-form"
+export default function SettingsAdminPage() { return <><p className="text-sm font-black tracking-[.16em] text-primary uppercase">CMS</p><h1 className="mt-2 text-3xl font-black">Business settings</h1><p className="mt-2 text-sm text-muted-foreground">Informasi kontak, brand, dan SEO default untuk website publik.</p><SettingsForm /></> }

@@ -1,0 +1,2 @@
+import { ResourceManager } from "@/components/admin/resource-manager"
+export default function FaqsAdminPage() { return <ResourceManager entity="faqs" title="FAQ" description="Publikasikan jawaban yang jelas dan akurat untuk calon pelanggan." fields={[{ name: "question", label: "Pertanyaan", required: true }, { name: "answer", label: "Jawaban", type: "textarea", required: true }, { name: "sortOrder", label: "Urutan", type: "number" }, { name: "isPublished", label: "Dipublikasikan", type: "checkbox" }]} /> }

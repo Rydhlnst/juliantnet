@@ -1,0 +1,5 @@
+import { desc } from "drizzle-orm"
+import { LeadsTable } from "@/components/admin/leads-table"
+import { db, isDatabaseConfigured } from "@/db"
+import { leads } from "@/db/schema"
+export default async function LeadsAdminPage() { const records = isDatabaseConfigured ? await db.select({ id: leads.id, name: leads.name, phone: leads.phone, email: leads.email, address: leads.address, city: leads.city, district: leads.district, postalCode: leads.postalCode, status: leads.status, createdAt: leads.createdAt }).from(leads).orderBy(desc(leads.createdAt)) : []; const serializable = records.map((item) => ({ ...item, createdAt: item.createdAt.toISOString() })); return <><p className="text-sm font-black tracking-[.16em] text-primary uppercase">CMS</p><h1 className="mt-2 text-3xl font-black">Leads</h1><p className="mt-2 text-sm text-muted-foreground">Kelola tindak lanjut calon pelanggan tanpa mengubah data pendaftaran asli.</p><div className="mt-8"><LeadsTable initialLeads={serializable} /></div></> }

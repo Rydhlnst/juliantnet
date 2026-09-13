@@ -45,3 +45,4 @@ next-env.d.ts
 # Playwright QA artifacts
 .playwright-cli/
 output/playwright/
+.neon
