@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm"
-import { auth } from "@/lib/auth"
+import { hashPassword } from "better-auth/crypto"
 import { db } from "@/db"
-import { coverageAreas, faqs, internetPlans, siteSettings, users } from "@/db/schema"
+import { accounts, coverageAreas, faqs, internetPlans, siteSettings, users } from "@/db/schema"
 
 const plans = [
   { id: "4e7a70c8-1d5d-4ed3-8e27-000000000001", name: "Hemat", slug: "hemat", speedMbps: 50, price: "0", description: "DEVELOPMENT PLACEHOLDER — browsing, belajar online, dan streaming HD.", deviceMin: 1, deviceMax: 3, benefits: ["Internet unlimited", "Dukungan lokal"], isPopular: false, isActive: true, isArchived: false, sortOrder: 1 },
@@ -18,7 +18,7 @@ async function seed() {
   const [faq] = await db.select({ id: faqs.id }).from(faqs).where(eq(faqs.question, "Bagaimana cara cek coverage?")).limit(1)
   if (!faq) await db.insert(faqs).values({ id: crypto.randomUUID(), question: "Bagaimana cara cek coverage?", answer: "Masukkan alamat dan lokasi lengkap untuk mendapatkan hasil awal. DEVELOPMENT PLACEHOLDER.", sortOrder: 1, isPublished: true })
   const email = process.env.SEED_ADMIN_EMAIL; const password = process.env.SEED_ADMIN_PASSWORD; const name = process.env.SEED_ADMIN_NAME ?? "Admin"
-  if (email && password) { const [existingAdmin] = await db.select({ id: users.id }).from(users).where(eq(users.email, email)).limit(1); if (!existingAdmin) { await auth.api.signUpEmail({ body: { name, email, password } }); const [created] = await db.select({ id: users.id }).from(users).where(eq(users.email, email)).limit(1); if (created) await db.update(users).set({ role: "SUPER_ADMIN", emailVerified: true }).where(eq(users.id, created.id)) } }
+  if (email && password) { const [existingAdmin] = await db.select({ id: users.id }).from(users).where(eq(users.email, email)).limit(1); if (!existingAdmin) { const id = crypto.randomUUID(); await db.insert(users).values({ id, name, email, emailVerified: true, role: "SUPER_ADMIN" }); await db.insert(accounts).values({ id: crypto.randomUUID(), accountId: id, providerId: "credential", userId: id, password: await hashPassword(password) }); } }
   console.log("Seed complete. All seeded commercial and coverage values are DEVELOPMENT PLACEHOLDER data.")
 }
 seed().catch((error) => { console.error(error); process.exit(1) })
