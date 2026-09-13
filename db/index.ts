@@ -1,16 +1,23 @@
-import { drizzle } from "drizzle-orm/mysql2"
-import { createPool } from "mysql2/promise"
+import { loadEnvFile } from "node:process"
+import { neon } from "@neondatabase/serverless"
+import { drizzle } from "drizzle-orm/neon-http"
+
+try {
+  loadEnvFile(".env.local")
+} catch {
+  // Vercel and production environments inject DATABASE_URL directly.
+}
 
 const connectionString = process.env.DATABASE_URL
 const isPostgresUrl = Boolean(connectionString && /^(postgres|postgresql):\/\//i.test(connectionString))
-const pool = createPool(
-  connectionString && !isPostgresUrl
+const sql = neon(
+  connectionString && isPostgresUrl
     ? connectionString
-    : "mysql://unconfigured:unconfigured@127.0.0.1:3306/unconfigured",
+    : "postgresql://unconfigured:unconfigured@127.0.0.1:5432/unconfigured",
 )
 
-export const db = drizzle(pool)
-export const isDatabaseConfigured = Boolean(connectionString && !isPostgresUrl)
-export const databaseConfigurationError = isPostgresUrl
-  ? "DATABASE_URL points to PostgreSQL, but this app is configured for MySQL/MariaDB."
+export const db = drizzle(sql)
+export const isDatabaseConfigured = Boolean(connectionString && isPostgresUrl)
+export const databaseConfigurationError = connectionString && !isPostgresUrl
+  ? "DATABASE_URL must point to a Neon PostgreSQL database."
   : null

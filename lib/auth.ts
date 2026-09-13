@@ -9,7 +9,7 @@ import type { UserRole } from "@/lib/contracts"
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   secret: process.env.BETTER_AUTH_SECRET ?? "development-secret-change-before-production-32-chars",
-  database: drizzleAdapter(db, { provider: "mysql", schema: { user: users, session: sessions, account: accounts, verification: verifications } }),
+  database: drizzleAdapter(db, { provider: "pg", schema: { user: users, session: sessions, account: accounts, verification: verifications } }),
   user: { additionalFields: { role: { type: "string", required: false, input: false, defaultValue: "ADMIN" } } },
   emailAndPassword: { enabled: true, disableSignUp: true },
   plugins: [nextCookies()],

@@ -7,19 +7,19 @@ try {
   // Production migration environments provide DATABASE_URL directly.
 }
 
-const databaseUrl = process.env.DATABASE_URL
+const databaseUrl = process.env.DATABASE_URL_UNPOOLED ?? process.env.DATABASE_URL
 
-if (databaseUrl && /^(postgres|postgresql):\/\//i.test(databaseUrl)) {
+if (databaseUrl && !/^(postgres|postgresql):\/\//i.test(databaseUrl)) {
   throw new Error(
-    "DATABASE_URL points to PostgreSQL, but this project migration is configured for MySQL/MariaDB. Set DATABASE_URL to a mysql:// or mariadb:// URL.",
+    "DATABASE_URL must point to a Neon PostgreSQL database (postgresql://...).",
   )
 }
 
 export default defineConfig({
   schema: "./db/schema.ts",
   out: "./db/migrations",
-  dialect: "mysql",
+  dialect: "postgresql",
   dbCredentials: {
-    url: databaseUrl ?? "mysql://unconfigured:unconfigured@127.0.0.1:3306/unconfigured",
+    url: databaseUrl ?? "postgresql://unconfigured:unconfigured@127.0.0.1:5432/unconfigured",
   },
 })
