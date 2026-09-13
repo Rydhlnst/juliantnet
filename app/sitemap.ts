@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://internetcepat.co.id"
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.internetcepat.co.id"
 const routes = ["", "/paket-internet", "/cek-coverage", "/internet-rumah", "/internet-bisnis", "/tentang", "/bantuan", "/faq", "/kontak", "/daftar"]
 
 export const revalidate = 3600
