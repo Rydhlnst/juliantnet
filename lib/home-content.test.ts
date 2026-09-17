@@ -2,6 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 import { HOME_SECTION_ORDER, mergeHomeSectionContent, moveSection } from "@/lib/home-content"
 import { buildHomeSections } from "@/lib/services/home-content"
+import { getSiteUrl } from "@/lib/site-url"
 
 test("merges persisted hero fields without dropping required defaults", () => {
   const content = mergeHomeSectionContent("hero", { heading: "Internet untuk semua" })
@@ -42,4 +43,12 @@ test("replaces legacy homepage image paths with Juliant campaign assets", () => 
 
   assert.equal(hero.imageSrc, "/brand/juliant-hero.jpeg")
   assert.equal(network.imageSrc, "/brand/juliant-connectivity.jpeg")
+})
+
+test("falls back when the public site URL is empty", () => {
+  assert.equal(getSiteUrl("").toString(), "http://localhost:3000/")
+})
+
+test("falls back when the public site URL is invalid", () => {
+  assert.equal(getSiteUrl("not-a-url").toString(), "http://localhost:3000/")
 })
