@@ -35,3 +35,11 @@ test("keeps the default CTA link when persisted CTA content is partial", () => {
   assert.equal(content.heading, "Get connected")
   assert.equal(content.ctaHref, "/cek-coverage")
 })
+
+test("replaces legacy homepage image paths with Juliant campaign assets", () => {
+  const hero = mergeHomeSectionContent("hero", { imageSrc: "/brand/internet-cepat-workspace.png" })
+  const network = mergeHomeSectionContent("network", { imageSrc: "/brand/internet-cepat-infrastructure.png" })
+
+  assert.equal(hero.imageSrc, "/brand/juliant-hero.jpeg")
+  assert.equal(network.imageSrc, "/brand/juliant-connectivity.jpeg")
+})

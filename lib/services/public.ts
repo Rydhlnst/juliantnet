@@ -3,7 +3,7 @@ import { db, isDatabaseConfigured } from "@/db"
 import { faqs, internetPlans, siteSettings } from "@/db/schema"
 import type { PublicFaq, PublicPlan, PublicSettings } from "@/lib/contracts"
 
-const fallbackSettings: PublicSettings = { brandName: "Internet Cepat", companyName: "Internet Cepat", whatsappNumber: "6280000000000", phone: null, email: null, businessAddress: null, defaultSeoTitle: "Internet Cepat | WiFi Cepat & Stabil", defaultSeoDescription: "DEVELOPMENT PLACEHOLDER — Internet WiFi cepat dan stabil untuk rumah dan bisnis.", footerCopy: "DEVELOPMENT PLACEHOLDER — Ganti informasi bisnis ini melalui CMS sebelum dipublikasikan." }
+const fallbackSettings: PublicSettings = { brandName: "JULIANT.NET", companyName: "JULIANT.NET", whatsappNumber: "6280000000000", phone: null, email: null, businessAddress: null, defaultSeoTitle: "JULIANT.NET | Internet Cepat", defaultSeoDescription: "DEVELOPMENT PLACEHOLDER — Internet WiFi cepat dan stabil untuk rumah dan bisnis.", footerCopy: "DEVELOPMENT PLACEHOLDER — Ganti informasi bisnis ini melalui CMS sebelum dipublikasikan." }
 const fallbackPlans: PublicPlan[] = [
   { id: "dev-hemat", name: "Hemat", slug: "hemat", speedMbps: 50, price: 0, promoPrice: null, promoLabel: null, description: "DEVELOPMENT PLACEHOLDER untuk browsing, belajar, dan streaming HD.", deviceMin: 1, deviceMax: 3, benefits: ["Internet unlimited", "Dukungan lokal"], isPopular: false, isPromoActive: false },
   { id: "dev-keluarga", name: "Keluarga", slug: "keluarga", speedMbps: 100, price: 0, promoPrice: null, promoLabel: null, description: "DEVELOPMENT PLACEHOLDER untuk streaming, kerja, dan perangkat keluarga.", deviceMin: 3, deviceMax: 6, benefits: ["Internet unlimited", "Instalasi terjadwal"], isPopular: true, isPromoActive: false },

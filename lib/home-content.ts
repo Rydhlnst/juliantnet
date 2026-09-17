@@ -100,8 +100,8 @@ export const HOME_SECTION_DEFAULTS: Record<HomeSectionKey, HomeSectionContent> =
     primaryCtaHref: "#coverage",
     secondaryCtaLabel: "Lihat Paket",
     secondaryCtaHref: "/paket-internet",
-    imageSrc: "/brand/internet-cepat-workspace.png",
-    imageAlt: "Ruang kerja dengan koneksi internet",
+    imageSrc: "/brand/juliant-hero.jpeg",
+    imageAlt: "Pelanggan Juliant.net menikmati internet cepat di ruang kerja",
   },
   coverage: {
     eyebrow: "Cek jaringan di lokasimu",
@@ -122,8 +122,8 @@ export const HOME_SECTION_DEFAULTS: Record<HomeSectionKey, HomeSectionContent> =
     featureTwo: "Informasi coverage jelas",
     featureThree: "Instalasi terjadwal",
     featureFour: "Bantuan mudah dijangkau",
-    imageSrc: "/brand/internet-cepat-infrastructure.png",
-    imageAlt: "Infrastruktur jaringan internet",
+    imageSrc: "/brand/juliant-connectivity.jpeg",
+    imageAlt: "Pelanggan Juliant.net terhubung dengan aktivitas digital",
   },
   installation: {
     eyebrow: "Cara mulai",
@@ -165,8 +165,18 @@ export function pickAllowedFields(key: HomeSectionKey, persisted: Record<string,
   return Object.fromEntries(Object.entries(persisted ?? {}).filter(([field]) => allowed.has(field)))
 }
 
+const LEGACY_IMAGE_PATHS = new Set(["/brand/internet-cepat-character.png", "/brand/internet-cepat-infrastructure.png", "/brand/internet-cepat-workspace.png"])
+const REPLACEMENT_IMAGE_PATHS: Partial<Record<HomeSectionKey, string>> = {
+  hero: "/brand/juliant-hero.jpeg",
+  network: "/brand/juliant-connectivity.jpeg",
+}
+
 export function mergeHomeSectionContent(key: HomeSectionKey, persisted: Record<string, string> | null | undefined) {
-  return { ...HOME_SECTION_DEFAULTS[key], ...pickAllowedFields(key, persisted) }
+  const content = { ...HOME_SECTION_DEFAULTS[key], ...pickAllowedFields(key, persisted) }
+  if (content.imageSrc && LEGACY_IMAGE_PATHS.has(content.imageSrc) && REPLACEMENT_IMAGE_PATHS[key]) {
+    content.imageSrc = REPLACEMENT_IMAGE_PATHS[key]
+  }
+  return content
 }
 
 export function moveSection<T extends string>(sections: T[], selected: T, direction: "up" | "down") {

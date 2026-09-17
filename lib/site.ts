@@ -1,6 +1,6 @@
 export const site = {
-  name: "Internet Cepat",
-  description: "Internet Cepat menghadirkan koneksi WiFi cepat dan stabil untuk rumah, kerja, hiburan, dan bisnis.",
+  name: "JULIANT.NET",
+  description: "JULIANT.NET menghadirkan koneksi WiFi cepat dan stabil untuk rumah, kerja, hiburan, dan bisnis.",
   url: "https://www.internetcepat.co.id",
   whatsappNumber: "6280000000000",
 } as const
