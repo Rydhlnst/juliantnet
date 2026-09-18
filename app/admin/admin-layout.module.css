@@ -1,0 +1,123 @@
+.root {
+  --background: #f7faff;
+  --foreground: #10213f;
+  --card: #ffffff;
+  --card-foreground: #10213f;
+  --popover: #ffffff;
+  --popover-foreground: #10213f;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #0b1f44;
+  --secondary-foreground: #f7fbff;
+  --muted: #eef4ff;
+  --muted-foreground: #5b6b84;
+  --accent: #7c3aed;
+  --accent-foreground: #ffffff;
+  --destructive: #b42318;
+  --border: #d5e0f0;
+  --input: #c6d5eb;
+  --ring: #2563eb;
+  --radius: 0.75rem;
+}
+
+.root :global(.admin-shell) {
+  background: var(--background) !important;
+  color: var(--foreground);
+}
+
+.root :global(.admin-shell > main) {
+  min-height: 100vh;
+  padding: 1.25rem !important;
+}
+
+.root :global(.admin-shell > .sticky) {
+  border-color: var(--border) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+}
+
+.root :global(.admin-shell aside) {
+  border-color: rgba(247, 251, 255, 0.12) !important;
+  background: #0b1f44 !important;
+}
+
+.root :global(.admin-shell aside span.bg-primary) {
+  background: #2563eb !important;
+}
+
+.root :global(.admin-shell aside a.bg-secondary-foreground) {
+  background: #f7fbff !important;
+  color: #0b1f44 !important;
+}
+
+.root :global(.admin-shell aside a:hover) {
+  background: rgba(247, 251, 255, 0.1) !important;
+  color: #f7fbff !important;
+}
+
+.root :global(.admin-shell [class*="rounded-"]:not([class*="rounded-full"])) {
+  border-radius: 12px !important;
+}
+
+.root :global(.admin-shell input),
+.root :global(.admin-shell textarea),
+.root :global(.admin-shell select) {
+  border-color: var(--input) !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+}
+
+.root :global(.admin-shell textarea) {
+  min-height: 7rem;
+}
+
+.root :global(.admin-shell [class*="bg-card"]) {
+  background: #ffffff !important;
+}
+
+.root :global(.admin-shell [class*="border"]) {
+  border-color: var(--border);
+}
+
+.root :global(.admin-shell [class*="bg-card"][class*="border"]) {
+  box-shadow: 0 10px 30px rgba(16, 33, 63, 0.06);
+}
+
+.root :global(.admin-shell table) {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.root :global(.admin-shell thead) {
+  background: #eef4ff !important;
+}
+
+.root :global(.admin-shell th) {
+  color: #5b6b84 !important;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.root :global(.admin-shell tbody tr:hover) {
+  background: #f1f6ff;
+}
+
+.root :global(.admin-shell a.text-primary:hover) {
+  color: #1d4ed8 !important;
+}
+
+.root :global(.admin-shell .fixed.inset-0) {
+  background: rgba(16, 33, 63, 0.34);
+}
+
+@media (min-width: 1024px) {
+  .root :global(.admin-shell > main) {
+    padding: 2.25rem 2.5rem 4rem 18rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .root :global(.admin-shell > main) {
+    padding: 1rem !important;
+  }
+}
