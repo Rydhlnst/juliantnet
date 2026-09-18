@@ -3,12 +3,13 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { nextCookies } from "better-auth/next-js"
 import { headers } from "next/headers"
 import { db } from "@/db"
+import { getTrustedAuthOrigins } from "@/lib/auth-config"
 import { accounts, sessions, users, verifications } from "@/db/schema"
 import type { UserRole } from "@/lib/contracts"
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
-  trustedOrigins: ["https://internetcepat.co.id", "https://www.internetcepat.co.id"],
+  trustedOrigins: getTrustedAuthOrigins(),
   secret: process.env.BETTER_AUTH_SECRET ?? "development-secret-change-before-production-32-chars",
   database: drizzleAdapter(db, { provider: "pg", schema: { user: users, session: sessions, account: accounts, verification: verifications } }),
   user: { additionalFields: { role: { type: "string", required: false, input: false, defaultValue: "ADMIN" } } },

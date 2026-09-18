@@ -23,8 +23,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: var(--font-geist);
-  --font-heading: var(--font-geist);
+  --font-sans: var(--font-jakarta);
+  --font-heading: var(--font-jakarta);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -54,9 +54,41 @@
 }
 
 * { @apply border-border; }
-html { @apply font-sans; }
-body { @apply min-h-screen bg-background text-foreground antialiased; }
-button, a, input { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2; }
+html {
+  @apply font-sans;
+  scrollbar-color: #9aaed0 transparent;
+  scrollbar-width: thin;
+}
+body {
+  @apply min-h-screen bg-background text-foreground antialiased;
+}
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background: #9aaed0;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+body::-webkit-scrollbar-corner {
+  background: transparent;
+}
+button, a, input {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+}
+.eyebrow {
+  @apply text-xs font-black uppercase tracking-[.18em] text-primary;
+}
 .admin-shell [class*="rounded-"] { border-radius: 0 !important; }
 .admin-shell { background: #f1f6ff; }
 .admin-shell input, .admin-shell textarea, .admin-shell select { border-radius: 0 !important; }

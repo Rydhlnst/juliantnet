@@ -3,6 +3,7 @@ import test from "node:test"
 import { HOME_SECTION_ORDER, mergeHomeSectionContent, moveSection } from "@/lib/home-content"
 import { buildHomeSections } from "@/lib/services/home-content"
 import { getSiteUrl } from "@/lib/site-url"
+import { getTrustedAuthOrigins } from "@/lib/auth-config"
 
 test("merges persisted hero fields without dropping required defaults", () => {
   const content = mergeHomeSectionContent("hero", { heading: "Internet untuk semua" })
@@ -51,4 +52,11 @@ test("falls back when the public site URL is empty", () => {
 
 test("falls back when the public site URL is invalid", () => {
   assert.equal(getSiteUrl("not-a-url").toString(), "http://localhost:3000/")
+})
+
+test("includes both Juliant production origins", () => {
+  const origins = getTrustedAuthOrigins("https://juliant.net")
+  assert.equal(origins.includes("https://juliant.net"), true)
+  assert.equal(origins.includes("https://www.juliant.net"), true)
+  assert.equal(origins.includes("https://internetcepat.co.id"), false)
 })
