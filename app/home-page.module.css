@@ -1,12 +1,12 @@
 .homePage {
-  --home-primary: #02c3bd;
-  --home-primary-dark: #00a9a4;
-  --home-navy: #0f172b;
-  --home-ink: #0f172b;
-  --home-muted: #64748b;
-  --home-line: #e5e7eb;
-  --home-soft: #f7fafc;
-  --home-cyan-soft: #e8fbfa;
+  --home-primary: #2563eb;
+  --home-primary-dark: #1d4ed8;
+  --home-navy: #0b1f44;
+  --home-ink: #10213f;
+  --home-muted: #5b6b84;
+  --home-line: #d5e0f0;
+  --home-soft: #f7faff;
+  --home-cyan-soft: #eef4ff;
   overflow: hidden;
   background: #ffffff;
   color: var(--home-ink);
@@ -44,7 +44,7 @@
 .primaryButton {
   border-radius: 999px !important;
   background: var(--home-primary) !important;
-  color: #041026 !important;
+  color: #ffffff !important;
   box-shadow: none !important;
   transition: transform 180ms ease, background-color 180ms ease;
 }
@@ -69,8 +69,8 @@
 
 .heroSection {
   background:
-    radial-gradient(circle at 82% 22%, rgba(2, 195, 189, 0.16), transparent 28%),
-    linear-gradient(180deg, #f6fffe 0%, #ffffff 88%);
+    radial-gradient(circle at 82% 22%, rgba(37, 99, 235, 0.14), transparent 28%),
+    linear-gradient(180deg, #f7faff 0%, #ffffff 88%);
 }
 
 .heroGrid {
@@ -144,7 +144,8 @@
 
 .heroVisual {
   position: relative;
-  min-height: 470px;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   overflow: hidden;
   border: 12px solid rgba(255, 255, 255, 0.82);
   border-radius: 28px;
@@ -153,7 +154,7 @@
 }
 
 .heroVisual :global(img) {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .heroMetric {
@@ -300,7 +301,8 @@
 
 .networkVisual {
   position: relative;
-  min-height: 500px;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   overflow: hidden;
   border-radius: 26px;
   background: var(--home-cyan-soft);
@@ -308,7 +310,7 @@
 }
 
 .networkVisual :global(img) {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .featureGrid {
@@ -385,11 +387,11 @@
 .finalCtaSection {
   padding-block: 96px;
   background: var(--home-primary) !important;
-  color: #041026 !important;
+  color: #ffffff !important;
 }
 
 .finalCtaSection :global(.eyebrow) {
-  color: rgba(4, 16, 38, 0.64) !important;
+  color: rgba(255, 255, 255, 0.78) !important;
 }
 
 .finalCtaSection h2 {
@@ -469,7 +471,7 @@
 
   .heroVisual,
   .networkVisual {
-    min-height: 380px;
+    min-height: 0;
   }
 
   .useCasesGrid {
@@ -500,7 +502,7 @@
 
   .heroVisual,
   .networkVisual {
-    min-height: 300px;
+    min-height: 0;
     border-width: 8px;
     border-radius: 20px;
   }
