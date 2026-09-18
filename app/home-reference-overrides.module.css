@@ -1,0 +1,19 @@
+.theme {
+  --background: #ffffff;
+  --foreground: #0f172b;
+  --card: #ffffff;
+  --card-foreground: #0f172b;
+  --popover: #ffffff;
+  --popover-foreground: #0f172b;
+  --primary: #02c3bd;
+  --primary-foreground: #041026;
+  --secondary: #0f172b;
+  --secondary-foreground: #ffffff;
+  --muted: #f7fafc;
+  --muted-foreground: #64748b;
+  --accent: #02c3bd;
+  --accent-foreground: #041026;
+  --border: #e5e7eb;
+  --input: #d7e0ea;
+  --ring: #02c3bd;
+}
